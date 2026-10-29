@@ -25,17 +25,16 @@ export function Contact() {
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
         <SectionHeading id="contact-title" sector={7} label="Contact" title="Pit Wall" />
 
-        <p className="max-w-2xl text-xl leading-relaxed text-titanium md:text-2xl">{contact.invitation}</p>
+        <p data-reveal className="max-w-2xl text-xl leading-relaxed text-titanium md:text-2xl">{contact.invitation}</p>
 
         <a
           href={`mailto:${contact.email}`}
-          aria-label={`Email ${contact.email}`}
           className="group mt-10 flex flex-col gap-3 border border-pitlane bg-surface p-5 transition-colors hover:border-lime sm:p-8 md:flex-row md:items-center md:justify-between"
         >
           <span className="flex items-center gap-3">
             <Mail aria-hidden="true" className="size-5 text-lime" />
             <span className="telemetry-label">Email</span>
-          </span>
+          </span>{' '}
           <span className="flex items-center gap-3 font-display text-[clamp(1.25rem,4.6vw,2.5rem)] font-bold">
             {/* Allow the address to wrap only after the @. */}
             <span>

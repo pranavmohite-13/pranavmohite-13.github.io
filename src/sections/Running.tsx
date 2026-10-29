@@ -14,7 +14,7 @@ export function Running() {
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
         <SectionHeading id="running-title" sector={5} label="Running" title="Road to HYROX" />
 
-        <div className="grid gap-6 lg:grid-cols-12">
+        <div data-reveal className="grid gap-6 lg:grid-cols-12">
           <div className="flex min-w-0 flex-col gap-6 lg:col-span-5">
             <p className="flex items-center gap-3 border-l border-lime pl-4 font-display text-xl font-bold uppercase md:text-2xl">
               <Flag aria-hidden="true" className="size-5 shrink-0 text-lime" />

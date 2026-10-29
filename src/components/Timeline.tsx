@@ -7,7 +7,7 @@ export function Timeline({ entries }: { entries: Experience[] }) {
       {entries.map((entry, i) => {
         const stint = String(entries.length - i).padStart(2, '0')
         return (
-          <li key={`${entry.company}-${entry.start}`} className="relative grid gap-4 pb-12 pl-8 last:pb-0 md:grid-cols-12 md:gap-6 md:pl-0">
+          <li data-reveal key={`${entry.company}-${entry.start}`} className="relative grid gap-4 pb-12 pl-8 last:pb-0 md:grid-cols-12 md:gap-6 md:pl-0">
             {/* Rail and node */}
             {i < entries.length - 1 && (
               <span aria-hidden="true" className="absolute top-2 bottom-0 left-[5px] w-px bg-pitlane md:left-[calc(25%+5px)]" />

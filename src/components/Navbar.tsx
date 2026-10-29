@@ -9,12 +9,16 @@ function Wordmark() {
   return (
     <a
       href="#top"
-      aria-label={`${profile.name}, back to top`}
       className="flex min-h-11 items-center font-display text-[0.95rem] font-bold tracking-[0.08em] uppercase"
     >
-      <span className="hidden sm:inline">{profile.name}</span>
-      <span className="sm:hidden">{profile.shortMark}</span>
-      <span className="ml-1.5 text-lime sm:ml-2">///</span>
+      {/* The full name is the link's accessible name at every width; the short mark and slashes are decoration. */}
+      <span className="sr-only sm:not-sr-only">{profile.name}</span>
+      <span aria-hidden="true" className="sm:hidden">
+        {profile.shortMark}
+      </span>
+      <span aria-hidden="true" className="ml-1.5 text-lime sm:ml-2">
+        ///
+      </span>
     </a>
   )
 }

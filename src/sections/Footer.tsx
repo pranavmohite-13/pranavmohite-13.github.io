@@ -13,7 +13,9 @@ export function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <a href="#top" className="flex min-h-11 items-center font-display text-lg font-bold tracking-[0.08em] uppercase">
             {profile.name}
-            <span className="ml-2 text-lime">///</span>
+            <span aria-hidden="true" className="ml-2 text-lime">
+              ///
+            </span>
           </a>
 
           <nav aria-label="Footer">

@@ -4,7 +4,7 @@ import type { SkillGroup as Group } from '@/data/skills'
 export function SkillGroup({ group, index }: { group: Group; index: number }) {
   const headingId = `skills-${group.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
   return (
-    <div role="group" aria-labelledby={headingId} className="grid gap-4 border-b border-pitlane py-6 md:grid-cols-12 md:gap-6">
+    <div data-reveal role="group" aria-labelledby={headingId} className="grid gap-4 border-b border-pitlane py-6 md:grid-cols-12 md:gap-6">
       <div className="flex items-baseline gap-4 md:col-span-4 lg:col-span-3">
         <span aria-hidden="true" className="font-mono text-xs text-lime">
           CH{String(index + 1).padStart(2, '0')}

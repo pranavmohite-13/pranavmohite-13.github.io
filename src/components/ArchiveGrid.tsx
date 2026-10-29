@@ -4,7 +4,7 @@ import type { ArchiveEntry } from '@/data/projects'
 export function ArchiveGrid({ entries }: { entries: ArchiveEntry[] }) {
   if (entries.length === 0) return null
   return (
-    <ul className="grid grid-cols-1 border-t border-l border-pitlane sm:grid-cols-2 lg:grid-cols-3">
+    <ul data-reveal className="grid grid-cols-1 border-t border-l border-pitlane sm:grid-cols-2 lg:grid-cols-3">
       {entries.map((entry) => (
         <li key={entry.name} className="group relative flex flex-col gap-4 border-r border-b border-pitlane p-6 transition-colors hover:bg-surface">
           <div className="flex items-start justify-between gap-4">

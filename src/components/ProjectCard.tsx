@@ -25,6 +25,7 @@ export function ProjectCard({ project, index, onOpen }: Props) {
 
   return (
     <article
+      data-reveal
       aria-labelledby={headingId}
       className="group grid grid-cols-1 border border-pitlane bg-surface transition-colors duration-300 hover:border-lime/70 lg:grid-cols-12"
     >

@@ -9,7 +9,7 @@ type Props = {
 
 export function SectionHeading({ sector, label, title, id }: Props) {
   return (
-    <div className="mb-10 flex flex-col gap-3 border-t border-pitlane pt-4 md:mb-14">
+    <div data-reveal className="mb-10 flex flex-col gap-3 border-t border-pitlane pt-4 md:mb-14">
       <p className="telemetry-label">
         Sector {String(sector).padStart(2, '0')} <span className="text-lime">/</span> {label}
       </p>

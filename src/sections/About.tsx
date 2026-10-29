@@ -31,7 +31,7 @@ export function About() {
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
         <SectionHeading id="about-title" sector={6} label="About" title="Driver Profile" />
 
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-6">
+        <div data-reveal className="grid gap-12 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-7">
             <div className="space-y-4 text-lg leading-relaxed text-titanium md:text-xl">
               {about.bio.map((line) => (
@@ -52,7 +52,7 @@ export function About() {
           </div>
         </div>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div data-reveal className="mt-14 grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           <Panel title="Achievements">
             <TitledList items={about.achievements} />
           </Panel>
