@@ -11,7 +11,7 @@ export const profile = {
   // Real, verifiable numbers only.
   readout: [
     { value: '3', label: 'Internships' },
-    { value: '500+', label: 'Tests written' },
+    { value: '4', label: 'Security projects' },
     { value: 'Top 5', label: 'of 1,000+ teams' },
   ],
   resumeUrl: '/Pranav_Mohite_Resume.pdf',

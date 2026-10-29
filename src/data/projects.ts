@@ -56,7 +56,6 @@ export const projects: Project[] = [
     ],
     links: {},
     caseStudy: {
-      // REVIEW(pranav): problem statement drafted from the brief; edit freely.
       problem:
         'Email encrypted with classical key exchange alone can be captured today and decrypted later by a quantum-capable attacker. A secure client also has to survive ordinary web-application attacks.',
       built: [
@@ -78,7 +77,7 @@ export const projects: Project[] = [
     summary: 'Live marine risk monitoring built on real NOAA weather and AIS vessel data.',
     stack: ['React', 'TypeScript', 'Motoko', 'Vitest'],
     status: 'shipped',
-    role: 'Fixed Broken Access Control (OWASP A01) in the Motoko backend with ownership validation checks.',
+    role: 'Built with a team of 5 at the hackathon; afterwards I refined it on my own fork: fixed Broken Access Control (OWASP A01), built the 249-test Vitest suite with GitHub Actions CI, and added the NOAA/AIS detection rules.',
     team: 'Team of 5 · Ocean Sentinels',
     badge: 'INDRADHANU International Grand Challenge (PCCOE): Top 5 of 1,000+ teams · Special Category Award, ₹20,000',
     highlights: [
@@ -86,9 +85,8 @@ export const projects: Project[] = [
       { metric: '3', text: 'bugs exposed by the tests, including a scale mismatch that classified low-risk data as Critical' },
       { metric: '120 → 81', text: "flagged vessels on one day's dataset after adding loitering, data-gap and speed rules" },
     ],
-    links: {},
+    links: { github: 'https://github.com/pranavmohite-13/oceanmind-ai-live-marine-intelligence-platform' },
     caseStudy: {
-      // REVIEW(pranav): problem statement drafted from the brief; edit freely.
       problem:
         'A marine risk platform is only useful if its scores are right and its backend only lets users act on data they own. Over-flagging buries the vessels that matter.',
       built: [
@@ -118,7 +116,6 @@ export const projects: Project[] = [
     ],
     links: {},
     caseStudy: {
-      // REVIEW(pranav): problem statement drafted from the brief; edit freely.
       problem: 'A suspicion score on its own does not help an investigator. They need to know which parts of a header triggered it.',
       built: [
         'An ensemble of Random Forest, XGBoost and Isolation Forest models.',
@@ -144,7 +141,6 @@ export const projects: Project[] = [
     ],
     links: {},
     caseStudy: {
-      // REVIEW(pranav): problem statement drafted from the brief; edit freely.
       problem: 'Checking a web target for exposed services and missing security headers by hand is slow and easy to do inconsistently.',
       built: [
         'Automated Nmap port scanning to find exposed services.',
