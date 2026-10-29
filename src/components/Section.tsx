@@ -19,7 +19,7 @@ type Props = {
 export function Section({ id, sector, label, title, children }: Props) {
   const titleId = `${id}-title`
   return (
-    <section id={id} aria-labelledby={titleId} className="kerb relative isolate scroll-mt-20 overflow-x-clip py-20 md:py-28">
+    <section id={id} aria-labelledby={titleId} className="kerb relative isolate overflow-x-clip py-20 md:py-28">
       <span aria-hidden="true" className="ghost">
         {String(sector).padStart(2, '0')}
       </span>

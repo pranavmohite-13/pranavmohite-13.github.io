@@ -25,7 +25,7 @@ export default function App() {
       <StartLights />
       <a
         href="#main"
-        className="fixed top-2 left-2 z-[60] -translate-y-24 bg-lime px-4 py-3 font-mono text-xs tracking-[0.12em] text-carbon uppercase focus:translate-y-0"
+        className="fixed top-2 left-2 z-[60] inline-flex min-h-11 -translate-y-24 items-center bg-lime px-4 font-mono text-xs tracking-[0.12em] text-carbon uppercase focus:translate-y-0"
       >
         Skip to content
       </a>

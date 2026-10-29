@@ -7,7 +7,7 @@ import { StatTile } from '@/components/StatTile'
 import { PaceChart } from '@/components/PaceChart'
 
 export function Running() {
-  if (!summary) return <section id="running" className="scroll-mt-20" />
+  if (!summary) return <section id="running" />
 
   return (
     <Section id="running" sector={5} label="Running" title="Road to HYROX">
