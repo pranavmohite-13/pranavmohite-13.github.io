@@ -1,12 +1,15 @@
 import { raceSections, type RaceSector } from '@/data/race'
-import { fast, updateRaceState, type FastTelemetry } from './store'
+import { fast, resetRaceState, updateRaceState, type FastTelemetry } from './store'
 
 export const MAX_SPEED = 340
 
 type Sink = (t: Readonly<FastTelemetry>) => void
+/** Lets a sink keep the loop alive for its own animation (e.g. the throttle trace fading out). */
+type Busy = () => boolean
 type Mark = { id: string; top: number; sector: RaceSector }
 
 const sinks = new Set<Sink>()
+const busyChecks = new Set<Busy>()
 let marks: Mark[] = []
 let maxScroll = 0
 let raf = 0
@@ -16,13 +19,35 @@ let lastT = 0
 let lastInput = 0
 let reduce = false
 
-/** Register a DOM writer that runs on every telemetry frame. Returns an unregister function. */
-export function registerSink(sink: Sink): () => void {
+/**
+ * Register a DOM writer that runs on every telemetry frame. An optional `busy` check keeps the
+ * loop running while it returns true. Returns an unregister function.
+ */
+export function registerSink(sink: Sink, busy?: Busy): () => void {
   sinks.add(sink)
+  if (busy) busyChecks.add(busy)
   sink(fast)
   return () => {
     sinks.delete(sink)
+    if (busy) busyChecks.delete(busy)
   }
+}
+
+/** Ask for frames without adding input (e.g. new trace points). */
+export function requestFrame() {
+  kick()
+}
+
+/** Back to the start line: top of the page, telemetry and sector history cleared. */
+export function restartRace() {
+  window.scrollTo({ top: 0, behavior: 'instant' })
+  lastY = 0
+  lastT = performance.now()
+  fast.speed = fast.thr = fast.brk = 0
+  resetRaceState()
+  measure()
+  updatePosition(0)
+  kick()
 }
 
 /** Feed extra input (hero throttle trace, "push" radio command). */
@@ -90,7 +115,8 @@ function frame(now: number) {
   }
   sinks.forEach((sink) => sink(fast))
   // Keep looping only while something is still moving.
-  if ((fast.speed || fast.thr || fast.brk) && !document.hidden) raf = requestAnimationFrame(frame)
+  const busy = fast.speed || fast.thr || fast.brk || [...busyChecks].some((check) => check())
+  if (busy && !document.hidden) raf = requestAnimationFrame(frame)
   else lastFrame = 0
 }
 

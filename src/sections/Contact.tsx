@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react'
-import { ArrowUpRight, FileText, Mail } from 'lucide-react'
+import { ArrowUpRight, FileText, Flag, Mail } from 'lucide-react'
 import { contact, profile } from '@/data/profile'
 import { Section } from '@/components/Section'
 import { GitHubMark } from '@/components/GitHubMark'
 import { LinkedInMark } from '@/components/LinkedInMark'
+import { restartWithLights } from '@/intro/lights'
 
 type Channel = { label: string; value: string; href: string; icon: ReactNode; external: boolean }
 
@@ -69,8 +70,19 @@ export function Contact() {
         ))}
       </ul>
 
+      <div className="mt-12 flex justify-end">
+        <button
+          type="button"
+          onClick={restartWithLights}
+          className="inline-flex min-h-12 items-center gap-2 bg-lime px-6 font-mono text-xs font-semibold tracking-[0.12em] text-carbon uppercase transition-colors hover:bg-titanium"
+        >
+          <Flag aria-hidden="true" className="size-4" />
+          Chequered flag · restart
+        </button>
+      </div>
+
       {/* Chequered flag: end of the lap. The wrapper clips the skewed edges. */}
-      <div aria-hidden="true" className="mt-16 overflow-hidden px-2">
+      <div aria-hidden="true" className="mt-10 overflow-hidden px-2">
         <div className="cheq" />
       </div>
     </Section>

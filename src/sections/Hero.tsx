@@ -1,7 +1,9 @@
-import type { CSSProperties } from 'react'
+import { useEffect, useRef, type CSSProperties, type PointerEvent, type RefObject } from 'react'
 import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { profile } from '@/data/profile'
 import { TelemetryLine } from '@/components/TelemetryLine'
+import { bump, registerSink, requestFrame } from '@/telemetry/engine'
+import { prefersReducedMotion } from '@/intro/lights'
 
 // Staggered entrance; each step starts 70ms after the last.
 const delay = (step: number): CSSProperties => ({ animationDelay: `${step * 70}ms` })
@@ -24,15 +26,118 @@ function BackgroundGrid() {
   )
 }
 
+const TRACE_POINTS = 80
+const TRACE_IDLE_MS = 350
+
+/**
+ * Pointer "throttle trace": a glowing polyline of the last ~80 pointer positions that fades out
+ * once the pointer stops. Higher on the hero = more throttle and speed. Mouse and pen only.
+ * Drawn by a telemetry sink, so it shares the one animation loop and never re-renders React.
+ */
+function useThrottleTrace() {
+  const heroRef = useRef<HTMLElement>(null)
+  const lineRef = useRef<SVGPolylineElement>(null)
+  const glowRef = useRef<SVGPolylineElement>(null)
+  const points = useRef<[number, number][]>([])
+  const lastMove = useRef(0)
+
+  useEffect(() => {
+    let lastFade = 0
+    let drawn = ''
+    return registerSink(
+      () => {
+        const pts = points.current
+        const now = performance.now()
+        if (pts.length && now - lastMove.current > TRACE_IDLE_MS) {
+          if (prefersReducedMotion()) {
+            pts.length = 0 // no fade animation: clear at once
+          } else {
+            // Drop ~4 points per 60ms, as in the prototype.
+            const drop = Math.max(1, Math.round(((now - (lastFade || now - 16)) / 60) * 4))
+            pts.splice(0, drop)
+          }
+          lastFade = now
+        } else {
+          lastFade = 0
+        }
+        const attr = pts.map((p) => p.join(',')).join(' ')
+        if (attr !== drawn) {
+          drawn = attr
+          lineRef.current?.setAttribute('points', attr)
+          glowRef.current?.setAttribute('points', attr)
+        }
+      },
+      () => points.current.length > 0,
+    )
+  }, [])
+
+  const onPointerMove = (e: PointerEvent<HTMLElement>) => {
+    if (e.pointerType === 'touch') return
+    const r = e.currentTarget.getBoundingClientRect()
+    if (!r.width || !r.height) return
+    const x = ((e.clientX - r.left) / r.width) * 1000
+    const y = ((e.clientY - r.top) / r.height) * 400
+    const pts = points.current
+    pts.push([Math.round(x), Math.round(y)])
+    if (pts.length > TRACE_POINTS) pts.shift()
+    lastMove.current = performance.now()
+    const height = Math.min(1, Math.max(0, 1 - y / 400))
+    bump({ thr: height * 100, speed: height * 300 })
+    requestFrame()
+  }
+
+  return { heroRef, lineRef, glowRef, onPointerMove }
+}
+
+/** Pause the streak animation while the hero is off-screen. */
+function usePauseOffscreen(ref: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !('IntersectionObserver' in window)) return
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry) el.toggleAttribute('data-offscreen', !entry.isIntersecting)
+    })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [ref])
+}
+
 export function Hero() {
+  const { heroRef, lineRef, glowRef, onPointerMove } = useThrottleTrace()
+  usePauseOffscreen(heroRef)
   const [line1, line2 = ''] = profile.headline
   // Below 640px the second line breaks into one slanted block per word, so every
   // line shares the same left edge; a single skewed block would shift its wrapped top line.
   const words = line2.replace(/\.$/, '').split(' ')
 
   return (
-    <section aria-labelledby="hero-title" className="relative isolate -mt-16 flex min-h-[calc(100svh-3.5rem)] flex-col pt-16 lg:min-h-[calc(100svh-5rem)]">
+    <section
+      ref={heroRef}
+      onPointerMove={onPointerMove}
+      aria-labelledby="hero-title"
+      className="relative isolate -mt-16 flex min-h-[calc(100svh-3.5rem)] flex-col overflow-hidden pt-16 lg:min-h-[calc(100svh-5rem)]"
+    >
       <BackgroundGrid />
+      <span aria-hidden="true" className="ghost-13">
+        13
+      </span>
+      <div aria-hidden="true" className="streaks">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 1000 400"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute inset-0 -z-[1] h-full w-full"
+      >
+        <polyline ref={glowRef} className="trace-glow" points="" />
+        <polyline ref={lineRef} className="trace" points="" />
+      </svg>
 
       <div className="mx-auto grid w-full max-w-[1440px] flex-1 grid-cols-12 content-center gap-x-6 gap-y-10 px-4 py-12 sm:px-6 md:py-16 lg:px-10">
         <div className="col-span-12">
@@ -94,6 +199,9 @@ export function Hero() {
               />
             </a>
           </div>
+          <p className="telemetry-label mt-8 hidden [@media(hover:hover)_and_(pointer:fine)]:block">
+            Cursor height = throttle · scroll to drive <span aria-hidden="true">↓</span>
+          </p>
         </div>
 
         <div className="col-span-12 md:col-span-5 md:col-start-8 lg:col-span-6 lg:col-start-7 lg:justify-self-end md:self-end">

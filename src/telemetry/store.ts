@@ -50,6 +50,12 @@ export function updateRaceState(next: { activeId: string; sector: RaceSector; sc
   listeners.forEach((fn) => fn())
 }
 
+/** Clear sector history for a race restart. */
+export function resetRaceState() {
+  race = { activeId: 'top', visited: new Set(['top']), maxSector: 1, scrolled: false }
+  listeners.forEach((fn) => fn())
+}
+
 function subscribe(fn: () => void) {
   listeners.add(fn)
   return () => {

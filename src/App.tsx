@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Navbar } from '@/components/Navbar'
 import { TimingTower } from '@/components/TimingTower'
 import { TelemetryHud } from '@/components/TelemetryHud'
+import { StartLights } from '@/components/StartLights'
 import { Hero } from '@/sections/Hero'
 import { Projects } from '@/sections/Projects'
 import { Experience } from '@/sections/Experience'
@@ -19,6 +20,8 @@ export default function App() {
 
   return (
     <div id="top">
+      {/* First in the DOM so "Skip intro" is the first tab stop while the lights run. */}
+      <StartLights />
       <a
         href="#main"
         className="fixed top-2 left-2 z-[60] -translate-y-24 bg-lime px-4 py-3 font-mono text-xs tracking-[0.12em] text-carbon uppercase focus:translate-y-0"
