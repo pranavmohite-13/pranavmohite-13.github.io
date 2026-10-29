@@ -5,3 +5,7 @@ dist
 .DS_Store
 .vite
 *.tsbuildinfo
+
+# Local-only notes and tooling
+BRIEF.md
+.claude/

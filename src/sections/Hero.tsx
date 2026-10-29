@@ -47,7 +47,7 @@ export function Hero() {
             </span>{' '}
             <span
               style={delay(2)}
-              className="mt-3 block animate-rise text-[clamp(2.5rem,12.5vw,6rem)] lg:text-[clamp(5rem,7.6vw,8.75rem)] leading-[0.88] font-bold tracking-[-0.025em] md:mt-5"
+              className="mt-3 block animate-rise text-[clamp(2.5rem,12.5vw,6rem)] lg:text-[clamp(6.5rem,10.4vw,10rem)] leading-[0.88] font-bold tracking-[-0.025em] md:mt-5"
             >
               <span className="block">{line1}</span>{' '}
               <span className="block">
