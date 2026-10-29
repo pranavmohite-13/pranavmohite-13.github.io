@@ -50,7 +50,7 @@ export function Hero() {
             </span>{' '}
             <span
               style={delay(2)}
-              className="mt-3 block animate-rise text-[clamp(2.5rem,12.5vw,6rem)] lg:text-[clamp(4.5rem,calc((100vw-312px)*0.114),10rem)] leading-[0.88] font-bold tracking-[-0.025em] md:mt-5"
+              className="mt-3 block animate-rise text-[clamp(2.5rem,12.5vw,6rem)] sm:text-[min(6rem,calc((100vw-48px)/8.9))] lg:text-[clamp(4.5rem,calc((100vw-312px)*0.114),10rem)] leading-[0.88] font-bold tracking-[-0.025em] md:mt-5"
             >
               <span className="slant block">{line1}</span>{' '}
               <span className="block sm:slant">
