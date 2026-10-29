@@ -24,7 +24,7 @@ export const skillGroups: SkillGroup[] = [
   { name: 'DevOps', skills: ['Git', 'GitHub Actions', 'CI/CD', 'Docker'] },
   {
     name: 'AI/ML',
-    skills: ['scikit-learn', 'PyTorch', 'TensorFlow', 'SHAP', 'Supervised learning', 'Unsupervised learning'],
+    skills: ['scikit-learn', 'XGBoost', 'Random Forest', 'SHAP', 'Supervised learning', 'Unsupervised learning'],
   },
   {
     name: 'Systems & networking',

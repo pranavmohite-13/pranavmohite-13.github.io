@@ -18,11 +18,10 @@ export const profile = {
 } as const
 
 export const about = {
-  // REVIEW(pranav): bio drafted from the brief; edit freely.
   bio: [
-    "I'm a final-year cybersecurity student who likes finding the place a system gives way: an access check that's missing, a key that can be swapped, a score that's off by a factor.",
-    'I fix it, then write the tests that prove it stays fixed.',
-    "Away from the keyboard I'm training for my first HYROX in 2027.",
+    "I'm a final-year cybersecurity student who likes finding where a system gives way: a missing access check, a key that can be swapped, a risk score on the wrong scale.",
+    'Then I fix it and write the tests that prove it stays fixed.',
+    "Away from the keyboard, I'm training for my first HYROX in 2027.",
   ],
   direction:
     "Building toward cloud security, DevSecOps and agentic AI security. Long-term, I want to build my own company.",

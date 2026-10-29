@@ -46,7 +46,9 @@ export const projects: Project[] = [
     summary: 'An email client built to stay private even against future quantum computers.',
     stack: ['Python', 'Flask', 'SQLite'],
     status: 'shipped',
-    // TODO(pranav): add a "My role" line (e.g. solo build?) and repo/demo URLs if public.
+    // Shared team work, so no individual role line.
+    team: 'Team project',
+    // TODO(pranav): repo/demo URLs if public.
     highlights: [
       { metric: '24', text: 'security flaws found and fixed, including CSRF, key hijacking and path traversal' },
       { metric: '14', text: 'attack scenarios in a dedicated security testing lab' },
@@ -132,7 +134,9 @@ export const projects: Project[] = [
     summary: 'Scans a web target for exposed services and missing security headers, then writes the fix-it report.',
     stack: ['Python', 'Nmap'],
     status: 'shipped',
-    // TODO(pranav): add a "My role" line and repo URL if public.
+    // Shared team work, so no individual role line.
+    team: 'Team project',
+    // TODO(pranav): repo URL if public.
     highlights: [
       { text: 'Automated Nmap port scanning to find exposed services' },
       { text: 'OWASP-aligned HTTP security headers analyzer' },
@@ -194,11 +198,6 @@ export const archive: ArchiveEntry[] = [
     name: 'WhatsApp/SMS scam detection',
     summary: 'Flags scam messages with NLP, URL analysis and OCR.',
     tags: ['NLP', 'URL analysis', 'OCR', 'College research'],
-  },
-  {
-    name: 'AmbuBrain',
-    // TODO(pranav): description.
-    tags: [],
   },
 ]
 
