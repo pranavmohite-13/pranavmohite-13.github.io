@@ -76,6 +76,13 @@ function Row({ project, pos, open, onToggle, onOpenCaseStudy }: RowProps) {
         hidden={!open}
         className="border-l-[3px] border-lime bg-[#121513] px-5 pt-[22px] pb-6 md:pl-[79px]"
       >
+        {/* Below md the row has no Crew / Key result columns, so they lead the panel instead. */}
+        <dl className="mb-5 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 md:hidden">
+          <dt className="telemetry-label pt-px">Crew</dt>
+          <dd className="font-mono text-xs text-titanium">{project.crew}</dd>
+          <dt className="telemetry-label pt-px">Key result</dt>
+          <dd className="font-mono text-xs text-titanium">{project.keyResult}</dd>
+        </dl>
         {project.stats.length > 0 && (
           <dl className="grid gap-5 sm:grid-cols-3">
             {project.stats.map((stat) => (
