@@ -16,7 +16,7 @@ export const raceSections: RaceSection[] = [
   { id: 'experience', pos: 'P3', label: 'Experience', sector: 2 },
   { id: 'skills', pos: 'P4', label: 'Skills', sector: 2 },
   { id: 'running', pos: 'P5', label: 'Running', sector: 3 },
-  // P6 Reaction ("reaction") joins when that section ships.
+  { id: 'reaction', pos: 'P6', label: 'Reaction', sector: 3 },
   { id: 'about', pos: 'P7', label: 'About', sector: 3 },
   { id: 'contact', pos: 'P8', label: 'Contact', sector: 3 },
 ]
