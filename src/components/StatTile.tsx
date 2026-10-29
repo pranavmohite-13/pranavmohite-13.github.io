@@ -7,7 +7,7 @@ type Props = {
 
 export function StatTile({ label, value, unit, note }: Props) {
   return (
-    <div className="flex flex-col gap-2 bg-surface p-4 sm:p-5">
+    <div className="brk flex flex-col gap-2 bg-surface p-4 sm:p-5">
       <dt className="telemetry-label">{label}</dt>
       <dd className="order-first font-mono text-2xl leading-none font-medium text-titanium sm:text-3xl">
         {value}

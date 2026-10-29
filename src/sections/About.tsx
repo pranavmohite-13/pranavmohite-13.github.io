@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { about } from '@/data/profile'
-import { SectionHeading } from '@/components/SectionHeading'
+import { Section } from '@/components/Section'
 
 function Panel({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -27,49 +27,45 @@ function TitledList({ items }: { items: readonly { title: string; detail: string
 export function About() {
   const { education } = about
   return (
-    <section id="about" aria-labelledby="about-title" className="scroll-mt-20 py-20 md:py-28">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
-        <SectionHeading id="about-title" sector={6} label="About" title="Driver Profile" />
-
-        <div data-reveal className="grid gap-12 lg:grid-cols-12 lg:gap-6">
-          <div className="lg:col-span-7">
-            <div className="space-y-4 text-lg leading-relaxed text-titanium md:text-xl">
-              {about.bio.map((line) => (
-                <p key={line}>{line}</p>
-              ))}
-            </div>
-            <p className="mt-8 border-l border-lime pl-4 text-muted">{about.direction}</p>
+    <Section id="about" sector={7} label="About" title="Driver profile">
+      <div data-reveal className="grid gap-12 lg:grid-cols-12 lg:gap-6">
+        <div className="lg:col-span-7">
+          <div className="space-y-4 text-lg leading-relaxed text-titanium md:text-xl">
+            {about.bio.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
           </div>
-
-          <div className="lg:col-span-4 lg:col-start-9">
-            <Panel title="Education">
-              <p className="font-medium text-titanium">{education.degree}</p>
-              <p className="mt-0.5 text-sm text-muted">{education.school}</p>
-              <p className="mt-3 font-mono text-xs tracking-[0.12em] uppercase">
-                {education.dates} <span className="text-muted">·</span> <span className="text-lime">{education.grade}</span>
-              </p>
-            </Panel>
-          </div>
+          <p className="mt-8 border-l border-lime pl-4 text-muted">{about.direction}</p>
         </div>
 
-        <div data-reveal className="mt-14 grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          <Panel title="Achievements">
-            <TitledList items={about.achievements} />
-          </Panel>
-          <Panel title="Certifications">
-            <TitledList items={about.certifications} />
-          </Panel>
-          <Panel title="Languages">
-            <ul className="flex flex-wrap gap-2">
-              {about.languages.map((lang) => (
-                <li key={lang} className="border border-pitlane px-3 py-1.5 text-sm">
-                  {lang}
-                </li>
-              ))}
-            </ul>
+        <div className="lg:col-span-4 lg:col-start-9">
+          <Panel title="Education">
+            <p className="font-medium text-titanium">{education.degree}</p>
+            <p className="mt-0.5 text-sm text-muted">{education.school}</p>
+            <p className="mt-3 font-mono text-xs tracking-[0.12em] uppercase">
+              {education.dates} <span className="text-muted">·</span> <span className="text-lime">{education.grade}</span>
+            </p>
           </Panel>
         </div>
       </div>
-    </section>
+
+      <div data-reveal className="mt-14 grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <Panel title="Achievements">
+          <TitledList items={about.achievements} />
+        </Panel>
+        <Panel title="Certifications">
+          <TitledList items={about.certifications} />
+        </Panel>
+        <Panel title="Languages">
+          <ul className="flex flex-wrap gap-2">
+            {about.languages.map((lang) => (
+              <li key={lang} className="border border-pitlane px-3 py-1.5 text-sm">
+                {lang}
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      </div>
+    </Section>
   )
 }

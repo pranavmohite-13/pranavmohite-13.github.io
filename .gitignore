@@ -9,3 +9,6 @@ dist
 # Local-only notes and tooling
 BRIEF.md
 .claude/
+
+# Redesign reference material (local only)
+design-reference/

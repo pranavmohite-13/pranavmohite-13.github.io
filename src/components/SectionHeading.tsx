@@ -9,13 +9,13 @@ type Props = {
 
 export function SectionHeading({ sector, label, title, id }: Props) {
   return (
-    <div data-reveal className="mb-10 flex flex-col gap-3 border-t border-pitlane pt-4 md:mb-14">
+    <div data-reveal className="mb-10 flex flex-col gap-3 md:mb-14">
       <p className="telemetry-label">
         Sector {String(sector).padStart(2, '0')} <span className="text-lime">/</span> {label}
       </p>
       <h2
         id={id}
-        className="font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.95] font-bold tracking-[-0.02em] uppercase"
+        className="slant font-display text-[clamp(2rem,6vw,4.5rem)] leading-[0.95] font-bold tracking-[-0.02em] uppercase"
       >
         {title}
       </h2>

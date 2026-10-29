@@ -21,13 +21,18 @@
   line-gap-override: 0%;
 }
 
+/* The single accent colour. Every lime utility and decoration reads it. */
+:root {
+  --accent: #c5f36a;
+}
+
 @theme {
   --color-carbon: #0b0d0c;
   --color-surface: #171b18;
   --color-pitlane: #272c29;
   --color-titanium: #e9ece8;
   --color-muted: #9ba29b;
-  --color-lime: #c5f36a;
+  --color-lime: var(--accent);
 
   --font-display: 'Space Grotesk Variable', 'Space Grotesk Fallback', system-ui, sans-serif;
   --font-sans: 'Inter Variable', 'Inter Fallback', system-ui, sans-serif;
@@ -80,6 +85,190 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-muted);
+}
+
+/* ---------- APEX visual layer (values from the approved prototype) ---------- */
+
+/* Carbon-fibre weave behind the whole page. */
+body {
+  background-image:
+    repeating-linear-gradient(45deg, rgb(255 255 255 / 0.022) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(-45deg, rgb(255 255 255 / 0.022) 0 2px, transparent 2px 6px);
+}
+
+/* Racing kerb on top of every section except the hero. */
+.kerb::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 26px, #1c201d 26px 52px);
+  opacity: 0.75;
+}
+
+/* Giant outlined sector number behind a section's content. */
+.ghost {
+  position: absolute;
+  top: 28px;
+  right: 14px;
+  z-index: -1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 110px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px #2a302c;
+  transform: skewX(-8deg);
+  pointer-events: none;
+  user-select: none;
+}
+@media (min-width: 860px) {
+  .ghost {
+    top: 36px;
+    right: 48px;
+    font-size: 220px;
+  }
+}
+
+/* Slanted display type. */
+.slant {
+  transform: skewX(-7deg);
+  transform-origin: left bottom;
+}
+
+/* HUD corner brackets. */
+.brk {
+  position: relative;
+}
+.brk::before,
+.brk::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 0 solid var(--accent);
+  opacity: 0.85;
+  pointer-events: none;
+}
+.brk::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.brk::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Chequered flag strip. */
+.cheq {
+  height: 30px;
+  background: conic-gradient(var(--color-titanium) 25%, var(--color-carbon) 0 50%, var(--color-titanium) 0 75%, var(--color-carbon) 0) 0 0 / 30px 30px;
+  transform: skewX(-12deg);
+  opacity: 0.9;
+}
+
+/* Timing tower rows. */
+.tw-item {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-left: 3px solid transparent;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-titanium);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+.tw-item:hover {
+  background: var(--color-surface);
+}
+.tw-item.is-live {
+  background: var(--color-surface);
+  border-left-color: var(--accent);
+  box-shadow: 0 0 28px -14px var(--accent);
+}
+.tw-item:focus-visible {
+  outline-offset: -2px;
+}
+.tw-pos,
+.tw-flag {
+  color: var(--color-muted);
+}
+.tw-flag {
+  font-size: 11px;
+}
+.is-live .tw-pos,
+.is-live .tw-flag {
+  color: var(--accent);
+}
+
+/* HUD parts. */
+.led {
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  border-radius: 2px;
+  background: #1d221f;
+}
+.led.led-g {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.led.led-r {
+  background: #ff5a36;
+  box-shadow: 0 0 8px #ff5a36;
+}
+.led.led-b {
+  background: #6e9bff;
+  box-shadow: 0 0 8px #6e9bff;
+}
+.hud-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #1d221f;
+}
+.drs {
+  padding: 6px 10px;
+  border: 1px solid var(--color-pitlane);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #7d857e;
+}
+.drs.is-on {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--color-carbon);
+}
+.sbox {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--color-pitlane);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+.sbox.is-live {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.sbox.is-done {
+  border-color: #3d6b3a;
+  color: #8fd18a;
 }
 
 /* Scroll reveal: hidden only once JS has armed it (see useReveal). */

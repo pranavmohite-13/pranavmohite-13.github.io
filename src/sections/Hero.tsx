@@ -28,7 +28,7 @@ export function Hero() {
   const [line1, line2] = profile.headline
 
   return (
-    <section aria-labelledby="hero-title" className="relative isolate -mt-16 flex min-h-svh flex-col pt-16">
+    <section aria-labelledby="hero-title" className="relative isolate -mt-16 flex min-h-[calc(100svh-3.5rem)] flex-col pt-16 lg:min-h-[calc(100svh-5rem)]">
       <BackgroundGrid />
 
       <div className="mx-auto grid w-full max-w-[1440px] flex-1 grid-cols-12 content-center gap-x-6 gap-y-10 px-4 py-12 sm:px-6 md:py-16 lg:px-10">
@@ -47,10 +47,10 @@ export function Hero() {
             </span>{' '}
             <span
               style={delay(2)}
-              className="mt-3 block animate-rise text-[clamp(2.5rem,12.5vw,6rem)] lg:text-[clamp(6.5rem,10.4vw,10rem)] leading-[0.88] font-bold tracking-[-0.025em] md:mt-5"
+              className="mt-3 block animate-rise text-[clamp(2.5rem,12.5vw,6rem)] lg:text-[clamp(4.5rem,calc((100vw-312px)*0.114),10rem)] leading-[0.88] font-bold tracking-[-0.025em] md:mt-5"
             >
-              <span className="block">{line1}</span>{' '}
-              <span className="block">
+              <span className="slant block">{line1}</span>{' '}
+              <span className="slant block">
                 {line2?.replace(/\.$/, '')}
                 <span className="text-lime">.</span>
               </span>
@@ -95,7 +95,7 @@ export function Hero() {
             <div>
               <dt className="text-muted">Readout</dt>
               <dd className="mt-1">
-                <ul className="flex flex-wrap gap-x-2 gap-y-1 tracking-[0.06em] text-titanium">
+                <ul className="flex flex-wrap gap-x-2 gap-y-1 tracking-normal text-titanium">
                   {profile.readout.map((item, i) => (
                     <li key={item.label} className="whitespace-nowrap">
                       <span className="text-lime">{item.value}</span> {item.label}

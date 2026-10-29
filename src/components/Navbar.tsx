@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { navItems, profile } from '@/data/profile'
-import { useScrollState } from '@/hooks/useScrollState'
-
-const sectionIds = navItems.map((item) => item.id)
+import { useRaceState } from '@/telemetry/store'
+import { registerSink } from '@/telemetry/engine'
 
 function Wordmark() {
   return (
@@ -24,7 +23,8 @@ function Wordmark() {
 }
 
 export function Navbar() {
-  const { scrolled, activeId } = useScrollState(sectionIds)
+  const { scrolled, activeId } = useRaceState()
+  const progressRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
   const menuId = useId()
   const toggleRef = useRef<HTMLButtonElement>(null)
@@ -79,10 +79,14 @@ export function Navbar() {
     }
   }, [open, close, menuId])
 
-  const linkClass = (id: string) =>
-    `relative flex min-h-11 items-center px-3 font-mono text-xs tracking-[0.12em] uppercase transition-colors hover:text-titanium ${
-      activeId === id ? 'text-titanium' : 'text-muted'
-    }`
+  // Lap progress line: written straight to the DOM each telemetry frame, never via React state.
+  useEffect(
+    () =>
+      registerSink((t) => {
+        if (progressRef.current) progressRef.current.style.transform = `scaleX(${t.progress})`
+      }),
+    [],
+  )
 
   return (
     <header
@@ -98,22 +102,6 @@ export function Navbar() {
       <div ref={trapRef}>
         <nav aria-label="Primary" className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
           <Wordmark />
-
-          <ul className="hidden items-center lg:flex">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a href={`#${item.id}`} className={linkClass(item.id)} aria-current={activeId === item.id ? 'true' : undefined}>
-                  {item.label}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute inset-x-3 bottom-2 h-px origin-left bg-lime transition-transform duration-300 ${
-                      activeId === item.id ? 'scale-x-100' : 'scale-x-0'
-                    }`}
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
 
           <div className="flex items-center gap-2">
             <a
@@ -175,6 +163,12 @@ export function Navbar() {
           </ul>
         </div>
       </div>
+
+      <div
+        ref={progressRef}
+        aria-hidden="true"
+        className="absolute inset-x-0 -bottom-px h-0.5 origin-left scale-x-0 bg-lime shadow-[0_0_12px_var(--accent)]"
+      />
     </header>
   )
 }
