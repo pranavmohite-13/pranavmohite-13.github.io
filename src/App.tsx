@@ -1,5 +1,6 @@
 import { Navbar } from '@/components/Navbar'
 import { Hero } from '@/sections/Hero'
+import { Projects } from '@/sections/Projects'
 import { navItems } from '@/data/profile'
 
 export default function App() {
@@ -14,8 +15,9 @@ export default function App() {
       <Navbar />
       <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
-        {/* Sections are filled in later stages; anchors exist now so navigation works. */}
-        {navItems.map((item) => (
+        <Projects />
+        {/* Remaining sections are filled in later stages; anchors exist now so navigation works. */}
+        {navItems.filter((item) => item.id !== 'projects').map((item) => (
           <section key={item.id} id={item.id} className="scroll-mt-20" />
         ))}
       </main>
