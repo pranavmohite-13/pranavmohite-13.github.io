@@ -1,0 +1,65 @@
+{
+  "source": "Strava export (activities.csv), distances and moving times as recorded by Strava. No GPS or route data included.",
+  "summary": {
+    "runs": 7,
+    "totalDistanceKm": 26.3,
+    "totalMovingTimeSec": 10897,
+    "avgPaceSecPerKm": 415,
+    "longestRunKm": 6.57,
+    "fastestPaceSecPerKm": 360,
+    "totalElevationGainM": 144,
+    "firstRun": "2026-01-20",
+    "lastRun": "2026-06-26"
+  },
+  "runs": [
+    {
+      "date": "2026-01-20",
+      "distanceKm": 5.12,
+      "movingTimeSec": 2111,
+      "paceSecPerKm": 412,
+      "elevationGainM": 37.3
+    },
+    {
+      "date": "2026-04-21",
+      "distanceKm": 5.04,
+      "movingTimeSec": 2198,
+      "paceSecPerKm": 436,
+      "elevationGainM": 23.1
+    },
+    {
+      "date": "2026-05-27",
+      "distanceKm": 6.57,
+      "movingTimeSec": 2958,
+      "paceSecPerKm": 450,
+      "elevationGainM": 33.4
+    },
+    {
+      "date": "2026-06-01",
+      "distanceKm": 1.31,
+      "movingTimeSec": 482,
+      "paceSecPerKm": 368,
+      "elevationGainM": 3.0
+    },
+    {
+      "date": "2026-06-15",
+      "distanceKm": 2.44,
+      "movingTimeSec": 968,
+      "paceSecPerKm": 396,
+      "elevationGainM": 22.3
+    },
+    {
+      "date": "2026-06-17",
+      "distanceKm": 2.56,
+      "movingTimeSec": 921,
+      "paceSecPerKm": 360,
+      "elevationGainM": 13.8
+    },
+    {
+      "date": "2026-06-26",
+      "distanceKm": 3.23,
+      "movingTimeSec": 1259,
+      "paceSecPerKm": 389,
+      "elevationGainM": 11.2
+    }
+  ]
+}
