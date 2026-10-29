@@ -47,6 +47,18 @@ export const about = {
   languages: ['English', 'Hindi', 'Marathi', 'German (basic)'],
 } as const
 
+export const runningGoal: { label: string; event?: string; date?: string } = {
+  label: 'Target: first HYROX, 2027',
+  // Optional, once booked: event: '<event name>', date: 'YYYY-MM-DD'.
+}
+
+export const contact = {
+  invitation: 'Open to cybersecurity, cloud security and SWE internships and full-time roles.',
+  email: 'pranavmohite1312@gmail.com',
+  github: 'https://github.com/pranavmohite-13',
+  linkedin: 'https://www.linkedin.com/in/pranav-mohite-/',
+} as const
+
 export type NavItem = { id: string; label: string }
 
 export const navItems: NavItem[] = [

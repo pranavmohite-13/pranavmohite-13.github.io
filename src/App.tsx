@@ -3,7 +3,10 @@ import { Hero } from '@/sections/Hero'
 import { Projects } from '@/sections/Projects'
 import { Experience } from '@/sections/Experience'
 import { Skills } from '@/sections/Skills'
+import { Running } from '@/sections/Running'
 import { About } from '@/sections/About'
+import { Contact } from '@/sections/Contact'
+import { Footer } from '@/sections/Footer'
 
 export default function App() {
   return (
@@ -20,11 +23,11 @@ export default function App() {
         <Projects />
         <Experience />
         <Skills />
-        {/* Running and Contact arrive in Stage 4; anchors exist now so navigation works. */}
-        <section id="running" className="scroll-mt-20" />
+        <Running />
         <About />
-        <section id="contact" className="scroll-mt-20" />
+        <Contact />
       </main>
+      <Footer />
     </div>
   )
 }
