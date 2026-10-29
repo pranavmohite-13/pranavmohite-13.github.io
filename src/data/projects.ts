@@ -43,7 +43,7 @@ export const projects: Project[] = [
   {
     slug: 'quantummail',
     name: 'QuantumMail (PQMail)',
-    summary: 'Post-quantum secure email client.',
+    summary: 'An email client built to stay private even against future quantum computers.',
     stack: ['Python', 'Flask', 'SQLite'],
     status: 'shipped',
     // TODO(pranav): add a "My role" line (e.g. solo build?) and repo/demo URLs if public.
@@ -73,7 +73,7 @@ export const projects: Project[] = [
   {
     slug: 'oceanmind',
     name: 'OceanMind AI',
-    summary: 'Marine risk monitoring platform.',
+    summary: 'Live marine risk monitoring built on real NOAA weather and AIS vessel data.',
     stack: ['React', 'TypeScript', 'Motoko', 'Vitest'],
     status: 'shipped',
     role: 'Fixed Broken Access Control (OWASP A01) in the Motoko backend with ownership validation checks.',
@@ -107,7 +107,7 @@ export const projects: Project[] = [
   {
     slug: 'email-header-forensics',
     name: 'Ensemble ML Email Header Forensics Framework',
-    summary: 'Explainable machine learning for spotting suspicious email headers. Final-year project.',
+    summary: 'Explainable ML that tells investigators why an email header looks suspicious.',
     stack: ['Python', 'Random Forest', 'XGBoost', 'Isolation Forest', 'SHAP'],
     status: 'in-development',
     highlights: [
@@ -129,7 +129,7 @@ export const projects: Project[] = [
   {
     slug: 'flux',
     name: 'Flux',
-    summary: 'Automated web vulnerability assessment.',
+    summary: 'Scans a web target for exposed services and missing security headers, then writes the fix-it report.',
     stack: ['Python', 'Nmap'],
     status: 'shipped',
     // TODO(pranav): add a "My role" line and repo URL if public.
@@ -186,7 +186,7 @@ export const archive: ArchiveEntry[] = [
   },
   {
     name: 'Kalangan Arts website',
-    summary: 'Responsive web build.',
+    summary: 'Responsive website built for Kalangan Arts during my web development internship.',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Internship'],
     // TODO(pranav): link only if confirmed public.
   },

@@ -1,4 +1,5 @@
-import { ArrowUpRight, FolderGit } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+import { GitHubMark } from '@/components/GitHubMark'
 import type { ProjectLinks as Links } from '@/data/projects'
 
 const buttonClass =
@@ -11,7 +12,7 @@ export function ProjectLinks({ links, name }: { links: Links; name: string }) {
     <div className="flex flex-wrap gap-3">
       {links.github && (
         <a href={links.github} target="_blank" rel="noopener" className={buttonClass} aria-label={`${name} on GitHub`}>
-          <FolderGit aria-hidden="true" className="size-4" />
+          <GitHubMark className="size-4" />
           GitHub
         </a>
       )}

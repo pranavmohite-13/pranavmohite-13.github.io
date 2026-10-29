@@ -30,7 +30,7 @@ export function ProjectCard({ project, index, onOpen }: Props) {
     >
       {/* Identity panel */}
       <div
-        className={`flex flex-col justify-between gap-8 border-b border-pitlane p-5 sm:p-8 lg:col-span-5 lg:border-b-0 lg:p-10 ${
+        className={`flex flex-col gap-8 border-b border-pitlane p-5 sm:p-8 lg:col-span-5 lg:border-b-0 lg:p-10 ${
           reversed ? 'lg:order-2 lg:border-l' : 'lg:border-r'
         }`}
       >
@@ -48,14 +48,14 @@ export function ProjectCard({ project, index, onOpen }: Props) {
             {project.name}
           </h3>
           <p className="mt-4 text-base leading-relaxed text-muted md:text-lg">{project.summary}</p>
+          <ul aria-label="Stack" className="mt-6 flex flex-wrap gap-2">
+            {project.stack.map((tag) => (
+              <li key={tag} className="border border-pitlane px-2.5 py-1 font-mono text-[0.6875rem] tracking-[0.08em] text-muted uppercase">
+                {tag}
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul aria-label="Stack" className="flex flex-wrap gap-2">
-          {project.stack.map((tag) => (
-            <li key={tag} className="border border-pitlane px-2.5 py-1 font-mono text-[0.6875rem] tracking-[0.08em] text-muted uppercase">
-              {tag}
-            </li>
-          ))}
-        </ul>
       </div>
 
       {/* Detail panel */}
