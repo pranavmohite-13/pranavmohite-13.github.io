@@ -1,6 +1,14 @@
 // Team radio script. Replies are plain text (rendered as text, never HTML). Edit here.
+import { profile } from '@/data/profile'
 
-export type RadioAction = { reply: string; goTo?: string; push?: boolean; clear?: boolean }
+export type RadioAction = {
+  reply: string
+  goTo?: string
+  push?: boolean
+  clear?: boolean
+  /** URL to open in a new tab (from the same user gesture, so it isn't blocked). */
+  open?: string
+}
 
 export const radioGreeting = 'Radio check, this is your race engineer. Type help, or tap a command below.'
 
@@ -26,7 +34,7 @@ export function radioReply(raw: string): RadioAction | null {
     }
   if (c === 'hyrox' || c === 'running')
     return { reply: 'Target: first HYROX in 2027. Training is logged on Strava. Showing the data.', goTo: 'running' }
-  if (c === 'resume' || c === 'cv') return { reply: 'Résumé is in the top bar, top right. One click, PDF.' }
+  if (c === 'resume' || c === 'cv') return { reply: 'Opening the résumé: PDF, new tab.', open: profile.resumeUrl }
   if (c === 'contact' || c === 'email' || c === 'hire')
     return { reply: 'pranavmohite1312@gmail.com\nPit wall is open. Taking you there.', goTo: 'contact' }
   if (c === 'push' || c === 'push push') return { reply: 'Copy. Push mode. Full throttle, DRS open.', push: true }

@@ -2,13 +2,15 @@ import { useEffect, useRef } from 'react'
 import { raceSectors, raceSections } from '@/data/race'
 import { useRaceState } from '@/telemetry/store'
 import { MAX_SPEED, registerSink } from '@/telemetry/engine'
+import { TeamRadio } from '@/components/TeamRadio'
 
 const LEDS = 12
 const ledColour = (i: number) => (i < 6 ? 'led-g' : i < 9 ? 'led-r' : 'led-b')
 const gearFor = (speed: number) => (speed < 5 ? 'N' : String(Math.min(8, 1 + Math.floor(speed / 42))))
 
 /**
- * Fixed bottom telemetry bar. Purely decorative, so it is hidden from assistive tech.
+ * Fixed bottom telemetry bar. The readouts are decorative and hidden from assistive tech;
+ * the docked Team radio button is the only interactive (and announced) part.
  * Fast values are written through refs by a telemetry sink; React only re-renders it
  * when the live sector changes.
  */
@@ -60,11 +62,8 @@ export function TelemetryHud() {
   }, [])
 
   return (
-    <div
-      aria-hidden="true"
-      className="fixed inset-x-0 bottom-0 z-40 flex h-14 items-center gap-4 border-t border-[#1d221f] bg-[#0e100f] px-4 select-none sm:gap-6 lg:h-20 lg:px-5"
-    >
-      <div className="w-[104px] lg:w-[118px]">
+    <div className="fixed inset-x-0 bottom-0 z-40 flex h-14 items-center gap-3 border-t border-[#1d221f] bg-[#0e100f] px-4 select-none sm:gap-6 lg:h-20 lg:gap-4 lg:px-5 xl:gap-5">
+      <div aria-hidden="true" className="w-[88px] sm:w-[104px] lg:w-[118px]">
         <div className="telemetry-label hidden lg:block">Speed</div>
         <div className="font-mono text-2xl leading-tight font-bold lg:text-3xl">
           <span ref={speedRef}>0</span>
@@ -72,14 +71,15 @@ export function TelemetryHud() {
         </div>
       </div>
 
-      <div className="w-12 text-center">
+      <div aria-hidden="true" className="w-10 text-center sm:w-12">
         <div className="telemetry-label hidden lg:block">Gear</div>
         <span ref={gearRef} className="font-mono text-2xl leading-tight font-bold text-lime lg:text-3xl">
           N
         </span>
       </div>
 
-      <div className="hidden flex-col gap-2.5 lg:flex">
+      {/* Shift lights from 1280px: between 1024 and 1279 the sector boxes need the room. */}
+      <div aria-hidden="true" className="hidden flex-col gap-2.5 xl:flex">
         <div className="telemetry-label">Shift lights</div>
         <div ref={ledsRef} className="flex gap-1">
           {Array.from({ length: LEDS }, (_, i) => (
@@ -88,7 +88,7 @@ export function TelemetryHud() {
         </div>
       </div>
 
-      <div className="hidden w-[150px] flex-col gap-1 lg:flex">
+      <div aria-hidden="true" className="hidden w-[150px] flex-col gap-1 lg:flex">
         <div className="telemetry-label flex justify-between">
           <span>Throttle</span>
           <span ref={thrValRef}>0%</span>
@@ -105,23 +105,25 @@ export function TelemetryHud() {
         </div>
       </div>
 
-      <span ref={drsRef} className="drs">
+      <span ref={drsRef} aria-hidden="true" className="drs">
         DRS
       </span>
 
-      <div className="hidden min-w-0 flex-1 gap-1.5 lg:flex">
+      <TeamRadio />
+
+      <div aria-hidden="true" className="hidden min-w-0 flex-1 gap-1.5 lg:flex">
         {raceSectors.map((s) => (
           <div
             key={s.n}
             className={`sbox ${s.n === liveSector ? 'is-live' : s.n <= maxSector ? 'is-done' : ''}`}
           >
             <div>S{s.n}</div>
-            <div className="mt-0.5 text-[13px] text-titanium uppercase">{s.label}</div>
+            <div className="mt-0.5 truncate text-[13px] text-titanium uppercase">{s.label}</div>
           </div>
         ))}
       </div>
 
-      <div className="ml-auto text-right">
+      <div aria-hidden="true" className="ml-auto text-right">
         <div className="telemetry-label hidden sm:block">Lap progress</div>
         <span ref={lapRef} className="font-mono text-xl leading-tight font-bold lg:text-2xl">
           0%

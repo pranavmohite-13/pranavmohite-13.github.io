@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
+import { Radio } from 'lucide-react'
 import { radioChips, radioGreeting, radioReply } from '@/data/radio'
 import { bump, MAX_SPEED } from '@/telemetry/engine'
 import { prefersReducedMotion } from '@/intro/lights'
@@ -13,7 +14,8 @@ function goTo(id: string) {
 }
 
 /**
- * Team radio: a small non-modal command console, bottom-right above the HUD.
+ * Team radio: a button docked in the telemetry HUD that opens a small non-modal command console
+ * directly above the HUD, anchored bottom-right.
  * Input is treated as plain text and rendered as text only. Nothing is stored or sent.
  */
 export function TeamRadio() {
@@ -50,6 +52,8 @@ export function TeamRadio() {
     }
     setLog((current) => [...current, { id: nextId++, who: 'you', text: raw.trim() }, { id: nextId++, who: 'eng', text: action.reply }])
     if (action.push) bump({ speed: MAX_SPEED, thr: 100 })
+    // Called from the submit/click handler, so the browser treats it as a user-initiated popup.
+    if (action.open) window.open(action.open, '_blank', 'noopener')
     const target = action.goTo
     if (target) window.setTimeout(() => goTo(target), 350)
   }
@@ -71,13 +75,16 @@ export function TeamRadio() {
       <button
         ref={toggleRef}
         type="button"
+        aria-label="Team radio"
         aria-expanded={open}
         aria-controls={dialogId}
         onClick={() => (open ? close() : setOpen(true))}
-        className="fixed right-4 bottom-[72px] z-40 inline-flex min-h-11 items-center gap-2 border border-lime bg-[#0e100f] px-4 font-mono text-xs tracking-[0.14em] uppercase transition-colors hover:bg-surface lg:right-5 lg:bottom-24"
+        className={`inline-flex size-11 shrink-0 items-center justify-center gap-2 border border-lime font-mono text-xs font-bold tracking-[0.14em] uppercase transition-colors lg:w-auto lg:px-3.5 ${
+          open ? 'bg-lime text-carbon' : 'text-titanium hover:bg-surface'
+        }`}
       >
-        <span aria-hidden="true" className="size-2 rounded-full bg-lime" />
-        {open ? 'Close radio' : 'Team radio'}
+        <Radio aria-hidden="true" className="size-4" />
+        <span className="hidden lg:inline">Radio</span>
       </button>
 
       <div
@@ -86,7 +93,7 @@ export function TeamRadio() {
         aria-labelledby={titleId}
         hidden={!open}
         onKeyDown={onKeyDown}
-        className="fixed right-4 bottom-[128px] z-40 flex h-[min(420px,calc(100svh-210px))] w-[380px] max-w-[calc(100vw-32px)] flex-col border border-lime bg-[#0e100f] shadow-[0_24px_60px_rgba(0,0,0,0.65)] lg:right-5 lg:bottom-[152px] lg:h-[min(420px,calc(100svh-240px))]"
+        className="fixed right-4 bottom-[64px] flex h-[min(420px,calc(100svh-136px))] w-[380px] max-w-[calc(100vw-32px)] flex-col border border-lime bg-[#0e100f] shadow-[0_24px_60px_rgba(0,0,0,0.65)] select-text lg:right-5 lg:bottom-[88px] lg:h-[min(420px,calc(100svh-168px))]"
       >
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-[#1d221f] px-3.5 py-3">
           <h2 id={titleId} className="telemetry-label shrink-0 tracking-[0.08em] whitespace-nowrap text-lime">

@@ -3,7 +3,6 @@ import { Navbar } from '@/components/Navbar'
 import { TimingTower } from '@/components/TimingTower'
 import { TelemetryHud } from '@/components/TelemetryHud'
 import { StartLights } from '@/components/StartLights'
-import { TeamRadio } from '@/components/TeamRadio'
 import { Hero } from '@/sections/Hero'
 import { Projects } from '@/sections/Projects'
 import { Experience } from '@/sections/Experience'
@@ -32,8 +31,8 @@ export default function App() {
       </a>
       <Navbar />
       <TimingTower />
-      {/* Room for the fixed tower (left, ≥1024px), the HUD and the team radio button above it. */}
-      <div className="pb-[7.5rem] lg:pb-[9.5rem] lg:pl-[232px]">
+      {/* Room for the fixed tower (left, ≥1024px) and telemetry HUD (bottom). */}
+      <div className="pb-14 lg:pb-20 lg:pl-[232px]">
         <main id="main" tabIndex={-1} className="outline-none">
           <Hero />
           <Projects />
@@ -47,7 +46,6 @@ export default function App() {
         <Footer />
       </div>
       <TelemetryHud />
-      <TeamRadio />
     </div>
   )
 }
