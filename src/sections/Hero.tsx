@@ -25,7 +25,10 @@ function BackgroundGrid() {
 }
 
 export function Hero() {
-  const [line1, line2] = profile.headline
+  const [line1, line2 = ''] = profile.headline
+  // Below 640px the second line breaks into one slanted block per word, so every
+  // line shares the same left edge; a single skewed block would shift its wrapped top line.
+  const words = line2.replace(/\.$/, '').split(' ')
 
   return (
     <section aria-labelledby="hero-title" className="relative isolate -mt-16 flex min-h-[calc(100svh-3.5rem)] flex-col pt-16 lg:min-h-[calc(100svh-5rem)]">
@@ -50,9 +53,16 @@ export function Hero() {
               className="mt-3 block animate-rise text-[clamp(2.5rem,12.5vw,6rem)] lg:text-[clamp(4.5rem,calc((100vw-312px)*0.114),10rem)] leading-[0.88] font-bold tracking-[-0.025em] md:mt-5"
             >
               <span className="slant block">{line1}</span>{' '}
-              <span className="slant block">
-                {line2?.replace(/\.$/, '')}
-                <span className="text-lime">.</span>
+              <span className="block sm:slant">
+                {words.map((word, i) => (
+                  <span key={word + i}>
+                    {i > 0 && ' '}
+                    <span className="block max-sm:slant sm:inline">
+                      {word}
+                      {i === words.length - 1 && <span className="text-lime">.</span>}
+                    </span>
+                  </span>
+                ))}
               </span>
             </span>
           </h1>

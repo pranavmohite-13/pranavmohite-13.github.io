@@ -131,8 +131,8 @@ body {
   }
 }
 
-/* Slanted display type. */
-.slant {
+/* Slanted display type. A utility, so it takes breakpoint variants (e.g. sm:slant). */
+@utility slant {
   transform: skewX(-7deg);
   transform-origin: left bottom;
 }
