@@ -4,9 +4,9 @@
 
 export type ProjectStatus = 'shipped' | 'in-development' | 'hidden'
 
-export type Highlight = {
-  /** Optional number to emphasise, e.g. "258". */
-  metric?: string
+/** A headline number (or short label) with its explanation, shown when a leaderboard row is expanded. */
+export type Stat = {
+  value: string
   text: string
 }
 
@@ -34,7 +34,12 @@ export type Project = {
   team?: string
   /** Award or recognition line. */
   badge?: string
-  highlights: Highlight[]
+  /** Leaderboard "Crew" column. */
+  crew: string
+  /** Leaderboard "Key result" column. */
+  keyResult: string
+  /** Three stats for the expanded leaderboard row. */
+  stats: Stat[]
   links: ProjectLinks
   caseStudy: CaseStudy
 }
@@ -49,10 +54,12 @@ export const projects: Project[] = [
     // Shared team work, so no individual role line.
     team: 'Team project',
     // TODO(pranav): repo/demo URLs if public.
-    highlights: [
-      { metric: '24', text: 'security flaws found and fixed, including CSRF, key hijacking and path traversal' },
-      { metric: '14', text: 'attack scenarios in a dedicated security testing lab' },
-      { metric: '258', text: 'pytest unit tests' },
+    crew: 'Team project',
+    keyResult: '24 flaws fixed · 258 tests',
+    stats: [
+      { value: '24', text: 'security flaws found and fixed, incl. CSRF, key hijacking, path traversal' },
+      { value: '258', text: 'pytest unit tests' },
+      { value: '14', text: 'attack scenarios in a dedicated security lab' },
     ],
     links: {},
     caseStudy: {
@@ -80,10 +87,12 @@ export const projects: Project[] = [
     role: 'Built with a team of 5 at the hackathon; afterwards I refined it on my own fork: fixed Broken Access Control (OWASP A01), built the 249-test Vitest suite with GitHub Actions CI, and added the NOAA/AIS detection rules.',
     team: 'Team of 5 · Ocean Sentinels',
     badge: 'INDRADHANU International Grand Challenge (PCCOE): Top 5 of 1,000+ teams · Special Category Award, ₹20,000',
-    highlights: [
-      { metric: '249', text: 'Vitest tests (~94% coverage of scoring logic) running in GitHub Actions CI' },
-      { metric: '3', text: 'bugs exposed by the tests, including a scale mismatch that classified low-risk data as Critical' },
-      { metric: '120 → 81', text: "flagged vessels on one day's dataset after adding loitering, data-gap and speed rules" },
+    crew: 'Team of 5 → my fork',
+    keyResult: 'Top 5 of 1,000+',
+    stats: [
+      { value: '249', text: 'Vitest tests, ~94% coverage of scoring logic, in GitHub Actions CI' },
+      { value: '120 → 81', text: 'flagged vessels after loitering, data-gap and speed rules' },
+      { value: 'A01', text: 'Broken Access Control fixed in the Motoko backend' },
     ],
     links: { github: 'https://github.com/pranavmohite-13/oceanmind-ai-live-marine-intelligence-platform' },
     caseStudy: {
@@ -110,9 +119,12 @@ export const projects: Project[] = [
     summary: 'Explainable ML that tells investigators why an email header looks suspicious.',
     stack: ['Python', 'Random Forest', 'XGBoost', 'Isolation Forest', 'SHAP'],
     status: 'in-development',
-    highlights: [
-      { text: 'Features from SPF, DKIM, DMARC, IP hops, timestamps and routing metadata' },
-      { text: 'SHAP explainability gives investigators the reasons behind each flag' },
+    crew: 'Final-year project',
+    keyResult: 'SHAP-explained flags',
+    stats: [
+      { value: '3', text: 'models in the ensemble: Random Forest, XGBoost, Isolation Forest' },
+      { value: 'SPF · DKIM', text: 'plus DMARC, IP hops, timestamps and routing as features' },
+      { value: 'SHAP', text: 'per-flag explanations for investigators' },
     ],
     links: {},
     caseStudy: {
@@ -134,10 +146,12 @@ export const projects: Project[] = [
     // Shared team work, so no individual role line.
     team: 'Team project',
     // TODO(pranav): repo URL if public.
-    highlights: [
-      { text: 'Automated Nmap port scanning to find exposed services' },
-      { text: 'OWASP-aligned HTTP security headers analyzer' },
-      { text: 'Auto-generated assessment reports with remediation steps' },
+    crew: 'Team project',
+    keyResult: 'Scan → headers → report',
+    stats: [
+      { value: 'Nmap', text: 'automated port scanning for exposed services' },
+      { value: 'OWASP', text: 'aligned HTTP security headers analyzer' },
+      { value: 'Auto', text: 'assessment reports with remediation steps' },
     ],
     links: {},
     caseStudy: {
@@ -157,7 +171,9 @@ export const projects: Project[] = [
     summary: '',
     stack: [],
     status: 'hidden',
-    highlights: [],
+    crew: '',
+    keyResult: '',
+    stats: [],
     links: {},
     caseStudy: {},
   },

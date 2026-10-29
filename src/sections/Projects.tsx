@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { visibleArchive, visibleProjects, type Project } from '@/data/projects'
 import { Section } from '@/components/Section'
-import { ProjectCard } from '@/components/ProjectCard'
+import { Leaderboard } from '@/components/Leaderboard'
 import { CaseStudy } from '@/components/CaseStudy'
 import { ArchiveGrid } from '@/components/ArchiveGrid'
 
@@ -16,17 +16,13 @@ export function Projects() {
 
   const handleClose = useCallback(() => {
     setOpen(null)
-    // Return focus to the card button that opened the case study.
+    // Return focus to the button that opened the case study.
     requestAnimationFrame(() => triggerRef.current?.focus())
   }, [])
 
   return (
     <Section id="projects" sector={2} label="Projects" title="The Garage">
-      <div className="flex flex-col gap-6 md:gap-8">
-        {visibleProjects.map((project, i) => (
-          <ProjectCard key={project.slug} project={project} index={i} onOpen={handleOpen} />
-        ))}
-      </div>
+      <Leaderboard projects={visibleProjects} onOpenCaseStudy={handleOpen} defaultOpen="oceanmind" />
 
       {visibleArchive.length > 0 && (
         <div className="mt-20 md:mt-28">

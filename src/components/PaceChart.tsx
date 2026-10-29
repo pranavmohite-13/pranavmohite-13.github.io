@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import type { Run, RunningSummary } from '@/lib/running'
 import { formatDate, formatKm, formatPace } from '@/lib/format'
 
@@ -36,6 +36,11 @@ export function PaceChart({ runs, summary }: Props) {
   // Faster (lower) pace plots higher.
   const y = (pace: number) => PAD.top + ((pace - yMin) / (yMax - yMin)) * innerH
   const points = runs.map((r, i) => `${x(i).toFixed(1)},${y(r.paceSecPerKm).toFixed(1)}`).join(' ')
+  // Area under the pace line, closed along the chart floor.
+  const floor = (PAD.top + innerH).toFixed(1)
+  const area = `${points} ${x(runs.length - 1).toFixed(1)},${floor} ${x(0).toFixed(1)},${floor}`
+  // useId can contain characters that break url(#…) references, so keep only safe ones.
+  const fillId = `pace-fill-${useId().replace(/[^\w-]/g, '')}`
 
   // Thin out date labels on narrow screens.
   const labelEvery = innerW / runs.length < 56 ? Math.ceil(56 / (innerW / runs.length)) : 1
@@ -63,6 +68,14 @@ export function PaceChart({ runs, summary }: Props) {
       <div ref={ref} style={{ height: HEIGHT }} className="relative" aria-hidden="true">
         {width > 0 && (
           <svg width={width} height={HEIGHT} className="absolute inset-0 overflow-visible font-mono">
+            <defs>
+              <linearGradient id={fillId} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stopColor="var(--accent)" stopOpacity="0.28" />
+                <stop offset="1" stopColor="var(--accent)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <polygon points={area} fill={`url(#${fillId})`} />
+
             {ticks.map((t) => (
               <g key={t}>
                 <line x1={PAD.left} x2={width - PAD.right} y1={y(t)} y2={y(t)} stroke="var(--color-pitlane)" />
@@ -91,7 +104,7 @@ export function PaceChart({ runs, summary }: Props) {
               AVG {formatPace(summary.avgPaceSecPerKm)}
             </text>
 
-            <polyline points={points} fill="none" stroke="var(--color-lime)" strokeWidth="1.5" strokeLinejoin="round" />
+            <polyline points={points} fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinejoin="round" />
             {runs.map((r, i) => (
               <g key={r.date + i}>
                 <circle cx={x(i)} cy={y(r.paceSecPerKm)} r="3.5" fill="var(--color-carbon)" stroke="var(--color-lime)" strokeWidth="1.5" />

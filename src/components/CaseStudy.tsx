@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Award, X } from 'lucide-react'
 import type { Project } from '@/data/projects'
 import { ProjectLinks } from '@/components/ProjectLinks'
-import { StatusPill } from '@/components/ProjectCard'
+import { StatusPill } from '@/components/StatusPill'
 
 type Props = {
   project: Project | null
