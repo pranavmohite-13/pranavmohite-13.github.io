@@ -46,8 +46,8 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: 'quantummail',
-    name: 'QuantumMail (PQMail)',
+    slug: 'pqmail',
+    name: 'PQMail',
     summary: 'An email client built to stay private even against future quantum computers.',
     stack: ['Python', 'Flask', 'SQLite'],
     status: 'shipped',

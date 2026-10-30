@@ -24,7 +24,7 @@ export function radioReply(raw: string): RadioAction | null {
     return { reply: 'Pranav Mohite. Final-year cybersecurity student at SSPU Pune. Car 13. Heading toward cloud security and DevSecOps.' }
   if (c === 'projects')
     return {
-      reply: 'Four cars in the garage: QuantumMail, OceanMind AI, Email Header Forensics, Flux. Taking you there now.',
+      reply: 'Four cars in the garage: PQMail, OceanMind AI, Email Header Forensics, Flux. Taking you there now.',
       goTo: 'projects',
     }
   if (c === 'skills')
