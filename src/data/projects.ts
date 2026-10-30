@@ -53,7 +53,7 @@ export const projects: Project[] = [
     status: 'shipped',
     // Shared team work, so no individual role line.
     team: 'Team project',
-    // TODO(pranav): repo/demo URLs if public.
+    // TODO(pranav): demo URL if public.
     crew: 'Team project',
     keyResult: '24 flaws fixed · 258 tests',
     stats: [
@@ -61,7 +61,7 @@ export const projects: Project[] = [
       { value: '258', text: 'pytest unit tests' },
       { value: '14', text: 'attack scenarios in a dedicated security lab' },
     ],
-    links: {},
+    links: { github: 'https://github.com/pranavmohite-13/pqmail' },
     caseStudy: {
       problem:
         'Email encrypted with classical key exchange alone can be captured today and decrypted later by a quantum-capable attacker. A secure client also has to survive ordinary web-application attacks.',
