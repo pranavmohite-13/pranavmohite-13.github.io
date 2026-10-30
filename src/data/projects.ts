@@ -211,6 +211,12 @@ export const archive: ArchiveEntry[] = [
     summary: 'Flags scam messages with NLP, URL analysis and OCR.',
     tags: ['NLP', 'URL analysis', 'OCR', 'College research'],
   },
+  {
+    name: 'AmbuBrain',
+    summary: 'OpenEnv reinforcement-learning environment for ethical ambulance routing: ICU capacity, traffic and fairness across city zones.',
+    tags: ['OpenEnv', 'Reinforcement learning', 'Python', 'Docker', 'Hackathon team'],
+    link: 'https://github.com/pranavmohite-13/ambubrain-openenv',
+  },
 ]
 
 export const visibleProjects = projects.filter((p) => p.status !== 'hidden')
